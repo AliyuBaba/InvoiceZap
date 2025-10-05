@@ -5,16 +5,18 @@ import { InvoiceCalculations } from '@/utils/calculations';
 
 interface InvoiceItemsTableProps {
   items: InvoiceItem[];
+  currency: string;
   onAddItem: () => void;
   onRemoveItem: (itemId: string) => void;
   onUpdateItem: (itemId: string, updates: Partial<InvoiceItem>) => void;
 }
 
-export function InvoiceItemsTable({ 
-  items, 
-  onAddItem, 
-  onRemoveItem, 
-  onUpdateItem 
+export function InvoiceItemsTable({
+  items,
+  currency,
+  onAddItem,
+  onRemoveItem,
+  onUpdateItem
 }: InvoiceItemsTableProps) {
   
   const handleItemChange = (itemId: string, field: keyof InvoiceItem, value: string | number) => {
@@ -113,7 +115,7 @@ export function InvoiceItemsTable({
                     />
                   </td>
                   <td className="py-3 text-right font-medium" data-testid={`text-item-amount-${index}`}>
-                    {InvoiceCalculations.formatCurrency(item.amount)}
+                    {InvoiceCalculations.formatCurrency(item.amount, currency)}
                   </td>
                   <td className="py-3 text-center">
                     <Button

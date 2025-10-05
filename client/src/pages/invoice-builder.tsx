@@ -146,6 +146,7 @@ export default function InvoiceBuilder() {
             />
             <InvoiceItemsTable
               items={invoice.items}
+              currency={invoice.currency}
               onAddItem={addItem}
               onRemoveItem={removeItem}
               onUpdateItem={updateItem}

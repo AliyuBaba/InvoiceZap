@@ -157,10 +157,10 @@ export function InvoicePreview({ invoice, onPrint, onFullscreen }: InvoicePrevie
                         {item.quantity}
                       </td>
                       <td className="py-3 text-right text-gray-700" data-testid={`text-preview-item-rate-${index}`}>
-                        {InvoiceCalculations.formatCurrency(item.rate)}
+                        {InvoiceCalculations.formatCurrency(item.rate, invoice.currency)}
                       </td>
                       <td className="py-3 text-right font-medium text-gray-900" data-testid={`text-preview-item-amount-${index}`}>
-                        {InvoiceCalculations.formatCurrency(item.amount)}
+                        {InvoiceCalculations.formatCurrency(item.amount, invoice.currency)}
                       </td>
                     </tr>
                   ))
@@ -176,14 +176,14 @@ export function InvoicePreview({ invoice, onPrint, onFullscreen }: InvoicePrevie
                 <div className="flex justify-between py-2">
                   <span className="text-gray-600">Subtotal:</span>
                   <span className="font-medium" data-testid="text-subtotal">
-                    {InvoiceCalculations.formatCurrency(invoice.subtotal)}
+                    {InvoiceCalculations.formatCurrency(invoice.subtotal, invoice.currency)}
                   </span>
                 </div>
                 {invoice.discount > 0 && (
                   <div className="flex justify-between py-2">
                     <span className="text-gray-600">Discount ({invoice.discount}%):</span>
                     <span className="font-medium text-green-600" data-testid="text-discount">
-                      -{InvoiceCalculations.formatCurrency(invoice.discountAmount)}
+                      -{InvoiceCalculations.formatCurrency(invoice.discountAmount, invoice.currency)}
                     </span>
                   </div>
                 )}
@@ -191,7 +191,7 @@ export function InvoicePreview({ invoice, onPrint, onFullscreen }: InvoicePrevie
                   <div className="flex justify-between py-2">
                     <span className="text-gray-600">Tax ({invoice.taxRate}%):</span>
                     <span className="font-medium" data-testid="text-tax">
-                      {InvoiceCalculations.formatCurrency(invoice.taxAmount)}
+                      {InvoiceCalculations.formatCurrency(invoice.taxAmount, invoice.currency)}
                     </span>
                   </div>
                 )}
@@ -199,7 +199,7 @@ export function InvoicePreview({ invoice, onPrint, onFullscreen }: InvoicePrevie
                   <div className="flex justify-between py-2">
                     <span className="text-lg font-semibold text-gray-900">Total:</span>
                     <span className="text-lg font-bold text-blue-600" data-testid="text-total">
-                      {InvoiceCalculations.formatCurrency(invoice.total)}
+                      {InvoiceCalculations.formatCurrency(invoice.total, invoice.currency)}
                     </span>
                   </div>
                 </div>

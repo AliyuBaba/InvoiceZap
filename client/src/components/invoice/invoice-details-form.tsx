@@ -1,4 +1,5 @@
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Invoice } from '@shared/schema';
 
 interface InvoiceDetailsFormProps {
@@ -14,7 +15,7 @@ export function InvoiceDetailsForm({ invoice, onUpdate }: InvoiceDetailsFormProp
         Invoice Details
       </h2>
       
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-4 gap-4">
         <div>
           <label htmlFor="invoice-number" className="block text-sm font-medium text-foreground mb-2">
             Invoice Number *
@@ -51,6 +52,26 @@ export function InvoiceDetailsForm({ invoice, onUpdate }: InvoiceDetailsFormProp
             onChange={(e) => onUpdate({ dueDate: e.target.value })}
             data-testid="input-due-date"
           />
+        </div>
+        <div>
+          <label htmlFor="currency" className="block text-sm font-medium text-foreground mb-2">
+            Currency *
+          </label>
+          <Select
+            value={invoice.currency}
+            onValueChange={(value) => onUpdate({ currency: value })}
+            data-testid="select-currency"
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select currency" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="NGN">NGN - Nigerian Naira</SelectItem>
+              <SelectItem value="USD">USD - US Dollar</SelectItem>
+              <SelectItem value="EUR">EUR - Euro</SelectItem>
+              <SelectItem value="GBP">GBP - British Pound</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
     </div>

@@ -107,6 +107,15 @@ export class StorageService {
     sessionStorage.removeItem(SESSION_KEYS.DRAFT_INVOICE);
   }
 
+  // Invoice Number Generation
+  static getNextInvoiceNumber(): string {
+    const key = 'zapinvoice_last_invoice_number';
+    let last = parseInt(localStorage.getItem(key) || '0', 10);
+    last += 1;
+    localStorage.setItem(key, last.toString());
+    return `INV-2025-${last.toString().padStart(5, '0')}`;
+  }
+
   // Image handling
   static async convertImageToBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {

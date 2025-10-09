@@ -66,7 +66,7 @@ export function InvoiceDetailsForm({ invoice, onUpdate }: InvoiceDetailsFormProp
               <SelectValue placeholder="Select currency" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="NGN">NGN - Nigerian Naira</SelectItem>
+              <SelectItem value="NGN">₦ - Nigerian Naira</SelectItem>
               <SelectItem value="USD">USD - US Dollar</SelectItem>
               <SelectItem value="EUR">EUR - Euro</SelectItem>
               <SelectItem value="GBP">GBP - British Pound</SelectItem>

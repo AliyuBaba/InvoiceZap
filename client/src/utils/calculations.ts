@@ -41,6 +41,9 @@ export class InvoiceCalculations {
   }
 
   static formatCurrency(amount: number, currency: string = 'USD'): string {
+    if (currency === 'NGN') {
+      return `₦${amount.toLocaleString('en-US')}`;
+    }
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency,

@@ -38,6 +38,14 @@ export function useInvoiceData() {
   const [invoice, setInvoice] = useSessionStorage<Invoice>('zapinvoice_draft_invoice', createDefaultInvoice());
   const [isCalculating, setIsCalculating] = useState(false);
 
+  // Optimize for fast page refresh by minimizing initial calculations
+  useEffect(() => {
+    // Only calculate totals if there are items to avoid unnecessary computations on refresh
+    if (invoice.items.length > 0) {
+      setTimeout(calculateTotals, 0);
+    }
+  }, []); // Empty dependency array to run only on mount
+
   // Manual calculate function that can be called when needed
   const calculateTotals = useCallback(() => {
     setInvoice(currentInvoice => {

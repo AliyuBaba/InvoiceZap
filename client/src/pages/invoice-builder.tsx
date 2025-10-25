@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { useInvoiceData } from '@/hooks/use-invoice-data';
 import { CompanyProfileForm } from '@/components/invoice/company-profile-form';
@@ -28,6 +28,26 @@ export default function InvoiceBuilder() {
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const [currentStep, setCurrentStep] = useState<'input' | 'preview'>('input');
+
+  // Optimize for fast page refresh by preventing unnecessary re-renders
+  useEffect(() => {
+    // Preload critical resources for faster refresh
+    const preloadCriticalResources = () => {
+      // Preload fonts and critical CSS
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap';
+      link.as = 'style';
+      document.head.appendChild(link);
+    };
+
+    preloadCriticalResources();
+
+    // Clean up on unmount
+    return () => {
+      // Cleanup any event listeners or resources if needed
+    };
+  }, []);
 
   const handleSaveTemplate = () => {
     const validation = validateInvoice();

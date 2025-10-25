@@ -11,6 +11,7 @@ import { PDFExportButton } from '@/components/invoice/pdf-export-button';
 import { Link } from 'wouter';
 import { useToast } from '@/hooks/use-toast';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useSessionStorage } from '@/hooks/use-local-storage';
 
 export default function InvoiceBuilder() {
   const {
@@ -27,7 +28,7 @@ export default function InvoiceBuilder() {
 
   const { toast } = useToast();
   const isMobile = useIsMobile();
-  const [currentStep, setCurrentStep] = useState<'input' | 'preview'>('input');
+  const [currentStep, setCurrentStep] = useSessionStorage<'input' | 'preview'>('zapinvoice_current_step', 'input');
 
   // Optimize for fast page refresh by preventing unnecessary re-renders
   useEffect(() => {

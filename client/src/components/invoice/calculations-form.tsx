@@ -23,8 +23,11 @@ export function CalculationsForm({ invoice, onUpdate }: CalculationsFormProps) {
           <Input
             id="discount"
             type="number"
-            value={invoice.discount}
-            onChange={(e) => onUpdate({ discount: Number(e.target.value) })}
+            value={invoice.discount === 0 ? '' : invoice.discount}
+            onChange={(e) => {
+              const val = e.target.value;
+              onUpdate({ discount: val === '' ? 0 : Number(val) });
+            }}
             min="0"
             max="100"
             step="0.1"
@@ -38,8 +41,11 @@ export function CalculationsForm({ invoice, onUpdate }: CalculationsFormProps) {
           <Input
             id="tax-rate"
             type="number"
-            value={invoice.taxRate}
-            onChange={(e) => onUpdate({ taxRate: Number(e.target.value) })}
+            value={invoice.taxRate === 0 ? '' : invoice.taxRate}
+            onChange={(e) => {
+              const val = e.target.value;
+              onUpdate({ taxRate: val === '' ? 0 : Number(val) });
+            }}
             min="0"
             max="100"
             step="0.1"

@@ -1,7 +1,24 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
+import { useEffect } from 'react';
 
 export default function LandingPage() {
+  // Clear all stored data on home page refresh for a fresh start
+  useEffect(() => {
+    // Clear session storage
+    sessionStorage.clear();
+
+    // Clear local storage except for company profiles and templates
+    const keysToKeep = ['zapinvoice_company_profiles', 'zapinvoice_invoice_templates'];
+    const keysToRemove = Object.keys(localStorage).filter(key =>
+      !keysToKeep.some(keepKey => key.includes(keepKey))
+    );
+
+    keysToRemove.forEach(key => {
+      localStorage.removeItem(key);
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-accent/10">
       <header className="border-b border-border bg-card/50 backdrop-blur-sm">
